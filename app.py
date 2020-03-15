@@ -1,15 +1,14 @@
 import os
 from flask import Flask, render_template, redirect, request, url_for
-# from flask_pymongo import PyMongo
+from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 
 
 app = Flask(__name__)
 
-# app.config['MONGO_DBNAME'] = 'hiker_cuisine'
-# app.config['MONGO_URI'] = 
 
-# mongo = PyMongo(app)
+
+mongo = PyMongo(app)
 
 @app.route('/')
 @app.route('/index')
@@ -18,7 +17,7 @@ def index():
 
 @app.route('/recipe_list')
 def recipe_list():
-    return render_template('recipe_list.html')
+    return render_template('recipe_list.html', recipes=mongo.db.recipes.find())
 
 @app.route('/add_recipe')
 def add_recipe():
