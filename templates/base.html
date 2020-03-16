@@ -18,7 +18,8 @@
         <nav>
             <div class="nav-wrapper">
                 <a href="{{url_for('index')}}" class="brand-logo">Logo</a>
-                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down sidenav-trigger">
                     <li><a href="{{url_for('recipe_list')}}">Recipe List</a></li>
                     <li><a href="{{url_for('add_recipe')}}">Add Recipe</a></li>
                     <li><a href="{{url_for('about')}}">About</a></li>
@@ -26,6 +27,13 @@
                 </ul>
             </div>
         </nav>
+
+        <ul class="sidenav" id="mobile-demo">
+            <li><a href="{{url_for('recipe_list')}}">Recipe List</a></li>
+            <li><a href="{{url_for('add_recipe')}}">Add Recipe</a></li>
+            <li><a href="{{url_for('about')}}">About</a></li>
+            <li><a href="{{url_for('contact')}}">Contact</a></li>
+        </ul>
 
         <!-- Content controlled by the individual pages -->
         {% block content %}
@@ -40,6 +48,18 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $('.collapsible').collapsible();
+        });
+
+        $(document).ready(function () {
+            $('select').formSelect();
+        });
+
+        $(document).ready(function () {
+            $('textarea#recipe_description').characterCounter();
+        });
+
+        $(document).ready(function () {
+            $('.sidenav').sidenav();
         });
     </script>
 </body>
