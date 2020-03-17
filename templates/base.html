@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <title>The Hikers Cuisine</title>
 
 </head>
@@ -42,26 +42,10 @@
     </div>
 
     <!-- Scripts -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
-        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('.collapsible').collapsible();
-        });
-
-        $(document).ready(function () {
-            $('select').formSelect();
-        });
-
-        $(document).ready(function () {
-            $('textarea#recipe_description').characterCounter();
-        });
-
-        $(document).ready(function () {
-            $('.sidenav').sidenav();
-        });
-    </script>
+    <script src="{{ url_for('static', filename='js/materialize.js') }}" type="text/javascript" ></script>
+    <script src="{{ url_for('static', filename='js/scripts.js') }}" type="text/javascript"></script>
 </body>
 
 </html>
