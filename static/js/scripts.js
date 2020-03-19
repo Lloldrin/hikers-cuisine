@@ -1,39 +1,217 @@
+/* ---------- Add Recipe ---------- */
+
+/* ----- Add Ingredients ----- */
+
 let ingredient_counter = 0;
 let recipe_ingredients = {}
 
-function more_ingredients() {
-
-    ingredient_amount = document.getElementById('add_ingredient_amount').value
-    ingredient_measure = + document.getElementById('add_ingredient_measure').value
-    ingredient_name = document.getElementById('add_ingredient_name').value;
-
-    if (ingredient_amount != "" && ingredient_measure != "" && ingredient_name != "") {
-        $('#current_ingredients').append(`
-        <tr id="ingredient_${ingredient_counter}">
-        <td> ${ingredient_amount + ' ' + ingredient_measure}</td>
-        <td> ${ingredient_name}</td>
-        <td><a class="btn-floating btn-small waves-effect waves-light transparent" id="remove_ingredient_${ingredient_counter}" onClick="remove_ingredient(this.id)"><i class="material-icons blue-grey-text">close</i></a>
-        </div><td>
-        </tr>`)
-        recipe_ingredient(ingredient_amount, ingredient_name, ingredient_counter)
-        ingredient_counter++;
-    }else{
-        M.toast({html: 'Please fill out all the fields'})
-    }
-};
-
-function recipe_ingredient(amount, ingredient, i){
-    recipe_ingredients[i] = [i]
-    recipe_ingredients[i]['amount'] = amount
-    recipe_ingredients[i]['ingredient'] = ingredient
-};
-
+// When clicked this button runs the more_ingredients function.
 $('#add_ingredients_btn').click(function () {
     more_ingredients()
 });
 
+// This listens for the user to submit an ingredient and creates a row in the #current_ingredients table. It also creates a button for the user to remove the ingredient from the table.
+function more_ingredients() {
+
+    let add_ingredient = {}
+    add_ingredient.amount = $('#add_ingredient_amount').val()
+    add_ingredient.measure = $('#add_ingredient_measure').val()
+    add_ingredient.name = $('#add_ingredient_name').val();
+    
+    if (add_ingredient.amount != "" && add_ingredient.measure != "" && add_ingredient.name != "") {
+        $('#current_ingredients').append(`
+        <tr id="ingredient_${ingredient_counter}">
+        <td>${add_ingredient.amount + ' ' + add_ingredient.measure}</td>
+        <td>${add_ingredient.name}</td>
+        <td><a class="btn-floating btn-small waves-effect waves-light transparent table_btn" id="remove_ingredient_${ingredient_counter}" onClick="remove_ingredient(this.id)"><i class="material-icons blue-grey-text">close</i></a>
+        </div><td>
+        </tr>`)
+        recipe_ingredient(add_ingredient, ingredient_counter)
+        ingredient_counter++;
+    } else {
+        M.toast({ html: 'Please fill out all the fields' })
+    }
+};
+
+// Function to add ingredients to an object. This object is integrated into the recipe object when the user submits the recipe.
+function recipe_ingredient(ingredient, i) {
+    recipe_ingredients[i] = {'amount' : ingredient.amount, 'measure' : ingredient.measure, 'name' : ingredient.name}
+};
+
+// Function to remove ingredients from the ingredient-object when the user removes them from the ingredient table.
 function remove_ingredient(ingredient_id) {
     i = ingredient_id.substr(18);
     $(`#ingredient_${i}`).remove()
     delete recipe_ingredients[i]
+}
+
+/* ----- Add Equipment ----- */
+
+let equipment_counter = 0;
+let recipe_equipments = {}
+
+// When clicked this button runs the more_equipment function.
+$('#add_equipment_btn').click(function () {
+    more_equipment()
+});
+
+// This listens for the user to submit equipment and creates a row in the #current_equipment table. It also creates a button for the user to remove the equipment from the table.
+function more_equipment() {
+
+    equipment_name = document.getElementById('add_equipment').value
+
+    if (equipment_name != "") {
+        $('#current_equipment').append(`
+        <tr id="equipment_${equipment_counter}">
+        <td></td>
+        <td>${equipment_name}</td>
+        <td><a class="btn-floating btn-small waves-effect waves-light transparent table_btn" id="remove_equipment_${equipment_counter}" onClick="remove_equipment(this.id)"><i class="material-icons blue-grey-text">close</i></a>
+        </div><td>
+        </tr>`)
+        recipe_equipment(equipment_name, equipment_counter)
+        equipment_counter++;
+    } else {
+        M.toast({ html: 'Please fill out all the fields' })
+    }
+};
+
+// Function to add equipment to an object. This object is integrated into the recipe object when the user submits the recipe.
+function recipe_equipment(equipment, i) {
+    recipe_equipments[i] = {'equipment' : equipment}
+    equipment_number()
+};
+
+// Function to remove equipment from the equipment-object when the user removes them from the equipment table.
+function remove_equipment(equipment_id) {
+    i = equipment_id.substr(17);
+    $(`#equipment_${i}`).remove()
+    delete recipe_equipments[i]
+    equipment_number()
+};
+
+function equipment_number() {
+    i = ($('#current_equipment tr').length)
+    for (let step = 0; step <= i; step++) {
+        $(`#current_equipment > tr:nth-child(${step}) > td:first-child`).text(`${step}.`)
+    }
+}
+
+/* ----- Add Preperations ----- */
+
+let preperation_counter = 0;
+let recipe_preperations = {}
+
+// When clicked this button runs the more_preperation function.
+$('#add_preperation_btn').click(function () {
+    more_preperation()
+});
+
+// This listens for the user to submit preperation and creates a row in the #current_preperation table. It also creates a button for the user to remove the preperation from the table.
+function more_preperation() {
+
+    preperation_name = document.getElementById('add_preperation').value
+
+    if (preperation_name != "") {
+        $('#current_preperation').append(`
+        <tr id="preperation_${preperation_counter}">
+        <td></td>
+        <td>${preperation_name}</td>
+        <td><a class="btn-floating btn-small waves-effect waves-light transparent table_btn" id="remove_preperation_${preperation_counter}" onClick="remove_preperation(this.id)"><i class="material-icons blue-grey-text">close</i></a>
+        </div><td>
+        </tr>`)
+        recipe_preperation(preperation_name, preperation_counter)
+        preperation_counter++;
+    } else {
+        M.toast({ html: 'Please fill out all the fields' })
+    }
+};
+
+// Function to add preperation to an object. This object is integrated into the recipe object when the user submits the recipe.
+function recipe_preperation(preperation, i) {
+    recipe_preperations[i] = {'preperation' : preperation}
+    preperation_number()
+};
+
+// Function to remove preperation from the preperation-object when the user removes them from the preperation table.
+function remove_preperation(preperation_id) {
+    i = preperation_id.substr(19);
+    $(`#preperation_${i}`).remove()
+    delete recipe_preperations[i]
+    preperation_number()
+};
+
+function preperation_number() {
+    i = ($('#current_preperation tr').length)
+    console.log(i)
+    for (let step = 0; step <= i; step++) {
+        console.log(step)
+        $(`#current_preperation > tr:nth-child(${step}) > td:first-child`).text(`${step}.`)
+    }
+}
+
+/* ----- Add Cooking Steps ----- */
+
+let cooking_step_counter = 0;
+let recipe_cooking_steps = {}
+
+// When clicked this button runs the more_cooking_step function.
+$('#add_cooking_step_btn').click(function () {
+    more_cooking_step()
+});
+
+// This listens for the user to submit cooking_step and creates a row in the #current_cooking_step table. It also creates a button for the user to remove the cooking_step from the table.
+function more_cooking_step() {
+
+    cooking_step_name = document.getElementById('add_cooking_step').value
+
+    if (cooking_step_name != "") {
+        $('#current_cooking_step').append(`
+        <tr id="cooking_step_${cooking_step_counter}">
+        <td></td>
+        <td>${cooking_step_name}</td>
+        <td><a class="btn-floating btn-small waves-effect waves-light transparent table_btn" id="remove_cooking_step_${cooking_step_counter}" onClick="remove_cooking_step(this.id)"><i class="material-icons blue-grey-text">close</i></a>
+        </div><td>
+        </tr>`)
+        recipe_cooking_step(cooking_step_name, cooking_step_counter)
+        cooking_step_counter++;
+    } else {
+        M.toast({ html: 'Please fill out all the fields' })
+    }
+};
+
+// Function to add cooking_step to an object. This object is integrated into the recipe object when the user submits the recipe.
+function recipe_cooking_step(cooking_step, i) {
+    recipe_cooking_steps[i] = {cooking_step:cooking_step}
+    cooking_step_number()
+};
+
+// Function to remove cooking_step from the cooking_step-object when the user removes them from the cooking_step table.
+function remove_cooking_step(cooking_step_id) {
+    i = cooking_step_id.substr(20);
+    $(`#cooking_step_${i}`).remove()
+    delete recipe_cooking_steps[i] 
+    cooking_step_number()
+}
+
+function cooking_step_number() {
+    i = ($('#current_cooking_step tr').length)
+    for (let step = 0; step <= i; step++) {
+        $(`#current_cooking_step > tr:nth-child(${step}) > td:first-child`).text(`${step}.`)
+    }
+}
+
+function check_recipe() {
+
+    current_recipe = {
+        'name' : $('#recipe_name').val(),
+        'category' : $('#recipe_category').val(),
+        'servings' : $('#recipe_servings').val(),
+        'description' : $('#recipe_description').val(),
+        'ingredients' : recipe_ingredients,
+        'equipment' : recipe_equipments,
+        'preperation' : recipe_preperations,
+        'cooking_steps' : recipe_cooking_steps,
+        'password' : $('#recipe_password').val(),
+    }
+    console.log(current_recipe)
 }

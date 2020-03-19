@@ -1,15 +1,54 @@
 body {
-    background-color: papayawhip;
+    background-color: ivory;
+}
+
+.card_row {
+    margin-bottom: 0px;
+}
+
+/* ---------- General Styling ---------- */
+
+.section_header {
+    padding: 10px 0px;
+}
+
+.select-wrapper input.select-dropdown{
+    text-align: center;
+}
+
+#recipe_password {
+    margin-top: 20px;
+}
+
+/* ---------- Table Styling ---------- */
+
+td {
+    padding: 5px 5px;
 }
 
 td:nth-child(1) {
-    width: 50px;
+    width: 75px;
 }
 
 td:nth-child(2) {
-    width: 150px;
+    width: 200px;
 }
 
 td:nth-child(3) {
     text-align: center;
+}
+
+.bottom_label {
+    position: inherit !important;
+}
+
+/* ---------- Button Styling --------- */
+
+.table_btn {
+    box-shadow: none;
+    -webkit-box-shadow: none;
+}
+
+#recipe_submit_btn {
+    margin-top: 20px;
 }
