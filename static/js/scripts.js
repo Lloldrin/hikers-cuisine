@@ -17,15 +17,14 @@ function more_ingredients() {
     add_ingredient.amount = $('#add_ingredient_amount').val()
     add_ingredient.measure = $('#add_ingredient_measure').val()
     add_ingredient.name = $('#add_ingredient_name').val();
-    
+
     if (add_ingredient.amount != "" && add_ingredient.measure != "" && add_ingredient.name != "") {
         $('#current_ingredients').append(`
-        <tr id="ingredient_${ingredient_counter}">
-        <td>${add_ingredient.amount + ' ' + add_ingredient.measure}</td>
-        <td>${add_ingredient.name}</td>
-        <td><a class="btn-floating btn-small waves-effect waves-light transparent table_btn" id="remove_ingredient_${ingredient_counter}" onClick="remove_ingredient(this.id)"><i class="material-icons blue-grey-text">close</i></a>
-        </div><td>
-        </tr>`)
+        <div class="row grey lighten-3 recipe_list valign-wrapper" id="ingredient_${ingredient_counter}">
+        <div class="col s3">${add_ingredient.amount + ' ' + add_ingredient.measure}</div>
+        <div class="col s8">${add_ingredient.name}</div>
+        <div class="col s1"><a class="btn-floating btn-small waves-effect waves-light transparent table_btn" id="remove_ingredient_${ingredient_counter}" onClick="remove_ingredient(this.id)"><i class="material-icons blue-grey-text">close</i></a></div>
+        </div>`)
         recipe_ingredient(add_ingredient, ingredient_counter)
         ingredient_counter++;
     } else {
@@ -35,7 +34,7 @@ function more_ingredients() {
 
 // Function to add ingredients to an object. This object is integrated into the recipe object when the user submits the recipe.
 function recipe_ingredient(ingredient, i) {
-    recipe_ingredients[i] = {'amount' : ingredient.amount, 'measure' : ingredient.measure, 'name' : ingredient.name}
+    recipe_ingredients[i] = { 'amount': ingredient.amount, 'measure': ingredient.measure, 'name': ingredient.name }
 };
 
 // Function to remove ingredients from the ingredient-object when the user removes them from the ingredient table.
@@ -62,12 +61,12 @@ function more_equipment() {
 
     if (equipment_name != "") {
         $('#current_equipment').append(`
-        <tr id="equipment_${equipment_counter}">
-        <td></td>
-        <td>${equipment_name}</td>
-        <td><a class="btn-floating btn-small waves-effect waves-light transparent table_btn" id="remove_equipment_${equipment_counter}" onClick="remove_equipment(this.id)"><i class="material-icons blue-grey-text">close</i></a>
-        </div><td>
-        </tr>`)
+        <div class="row grey lighten-3 recipe_list valign-wrapper" id="equipment_${equipment_counter}">
+        <div class="col s1"></div>
+        <div class="col s10">${equipment_name}</div>
+        <div class="col s1"><a class="btn-floating btn-small waves-effect waves-light transparent table_btn" id="remove_equipment_${equipment_counter}" onClick="remove_equipment(this.id)"><i class="material-icons blue-grey-text">close</i></a></div>
+        </div>
+        `)
         recipe_equipment(equipment_name, equipment_counter)
         equipment_counter++;
     } else {
@@ -77,7 +76,7 @@ function more_equipment() {
 
 // Function to add equipment to an object. This object is integrated into the recipe object when the user submits the recipe.
 function recipe_equipment(equipment, i) {
-    recipe_equipments[i] = {'equipment' : equipment}
+    recipe_equipments[i] = { 'equipment': equipment }
     equipment_number()
 };
 
@@ -90,9 +89,9 @@ function remove_equipment(equipment_id) {
 };
 
 function equipment_number() {
-    i = ($('#current_equipment tr').length)
+    i = ($('#current_equipment').prop('childElementCount'))
     for (let step = 0; step <= i; step++) {
-        $(`#current_equipment > tr:nth-child(${step}) > td:first-child`).text(`${step}.`)
+        $(`#current_equipment > div:nth-child(${step}) > div:first-child`).text(`${step}.`)
     }
 }
 
@@ -113,12 +112,12 @@ function more_preperation() {
 
     if (preperation_name != "") {
         $('#current_preperation').append(`
-        <tr id="preperation_${preperation_counter}">
-        <td></td>
-        <td>${preperation_name}</td>
-        <td><a class="btn-floating btn-small waves-effect waves-light transparent table_btn" id="remove_preperation_${preperation_counter}" onClick="remove_preperation(this.id)"><i class="material-icons blue-grey-text">close</i></a>
-        </div><td>
-        </tr>`)
+        <div class="row grey lighten-3 recipe_list valign-wrapper" id="preperation_${preperation_counter}">
+        <div class="col s1"></div>
+        <div class="col s10">${preperation_name}</div>
+        <div class="col s1"><a class="btn-floating btn-small waves-effect waves-light transparent table_btn" id="remove_preperation_${preperation_counter}" onClick="remove_preperation(this.id)"><i class="material-icons blue-grey-text">close</i></a></div>
+        </div>
+        `)
         recipe_preperation(preperation_name, preperation_counter)
         preperation_counter++;
     } else {
@@ -128,7 +127,7 @@ function more_preperation() {
 
 // Function to add preperation to an object. This object is integrated into the recipe object when the user submits the recipe.
 function recipe_preperation(preperation, i) {
-    recipe_preperations[i] = {'preperation' : preperation}
+    recipe_preperations[i] = { 'preperation': preperation }
     preperation_number()
 };
 
@@ -141,11 +140,11 @@ function remove_preperation(preperation_id) {
 };
 
 function preperation_number() {
-    i = ($('#current_preperation tr').length)
+    i = ($('#current_preperation').prop('childElementCount'))
     console.log(i)
     for (let step = 0; step <= i; step++) {
         console.log(step)
-        $(`#current_preperation > tr:nth-child(${step}) > td:first-child`).text(`${step}.`)
+        $(`#current_preperation > div:nth-child(${step}) > div:first-child`).text(`${step}.`)
     }
 }
 
@@ -166,12 +165,12 @@ function more_cooking_step() {
 
     if (cooking_step_name != "") {
         $('#current_cooking_step').append(`
-        <tr id="cooking_step_${cooking_step_counter}">
-        <td></td>
-        <td>${cooking_step_name}</td>
-        <td><a class="btn-floating btn-small waves-effect waves-light transparent table_btn" id="remove_cooking_step_${cooking_step_counter}" onClick="remove_cooking_step(this.id)"><i class="material-icons blue-grey-text">close</i></a>
-        </div><td>
-        </tr>`)
+        <div class="row grey lighten-3 recipe_list valign-wrapper" id="cooking_step_${cooking_step_counter}">
+        <div class="col s1"></div>
+        <div class="col s10">${cooking_step_name}</div>
+        <div class="col s1"><a class="btn-floating btn-small waves-effect waves-light transparent table_btn" id="remove_cooking_step_${cooking_step_counter}" onClick="remove_cooking_step(this.id)"><i class="material-icons blue-grey-text">close</i></a></div> 
+        </div>
+        `)
         recipe_cooking_step(cooking_step_name, cooking_step_counter)
         cooking_step_counter++;
     } else {
@@ -181,7 +180,7 @@ function more_cooking_step() {
 
 // Function to add cooking_step to an object. This object is integrated into the recipe object when the user submits the recipe.
 function recipe_cooking_step(cooking_step, i) {
-    recipe_cooking_steps[i] = {cooking_step:cooking_step}
+    recipe_cooking_steps[i] = { cooking_step: cooking_step }
     cooking_step_number()
 };
 
@@ -189,29 +188,29 @@ function recipe_cooking_step(cooking_step, i) {
 function remove_cooking_step(cooking_step_id) {
     i = cooking_step_id.substr(20);
     $(`#cooking_step_${i}`).remove()
-    delete recipe_cooking_steps[i] 
+    delete recipe_cooking_steps[i]
     cooking_step_number()
 }
 
 function cooking_step_number() {
-    i = ($('#current_cooking_step tr').length)
+    i = ($('#current_cooking_step').prop('childElementCount'))
     for (let step = 0; step <= i; step++) {
-        $(`#current_cooking_step > tr:nth-child(${step}) > td:first-child`).text(`${step}.`)
+        $(`#current_cooking_step > div:nth-child(${step}) > div:first-child`).text(`${step}.`)
     }
 }
 
 function check_recipe() {
 
     current_recipe = {
-        'name' : $('#recipe_name').val(),
-        'category' : $('#recipe_category').val(),
-        'servings' : $('#recipe_servings').val(),
-        'description' : $('#recipe_description').val(),
-        'ingredients' : recipe_ingredients,
-        'equipment' : recipe_equipments,
-        'preperation' : recipe_preperations,
-        'cooking_steps' : recipe_cooking_steps,
-        'password' : $('#recipe_password').val(),
+        'name': $('#recipe_name').val(),
+        'category': $('#recipe_category').val(),
+        'servings': $('#recipe_servings').val(),
+        'description': $('#recipe_description').val(),
+        'ingredients': recipe_ingredients,
+        'equipment': recipe_equipments,
+        'preperation': recipe_preperations,
+        'cooking_steps': recipe_cooking_steps,
+        'password': $('#recipe_password').val(),
     }
     console.log(current_recipe)
 }

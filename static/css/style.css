@@ -1,5 +1,5 @@
 body {
-    background-color: ivory;
+    background-color: whitesmoke;
 }
 
 .card_row {
@@ -20,23 +20,47 @@ body {
     margin-top: 20px;
 }
 
+.recipe_list {
+    margin-top: 0.5rem;
+}
+
+.recipe_list {
+    margin: 0px;
+    padding: 5px 20px 5px 5px
+}
 /* ---------- Table Styling ---------- */
 
 td {
     padding: 5px 5px;
 }
 
-td:nth-child(1) {
-    width: 75px;
+/* td:nth-child(1) {
+    width: 10%;
+    text-align: center;
 }
 
 td:nth-child(2) {
-    width: 200px;
+    width: 225%;
 }
 
 td:nth-child(3) {
-    text-align: center;
+    width: 25%
 }
+
+#current_ingredients tr td:nth-child(1) {
+    width: 120px;
+    text-align: left;
+}
+
+#current_ingredients tr td:nth-child(2) {
+    width: 100%;
+}
+
+#current_ingredients tr td:nth-child(3) {
+    width: 25%;
+} */
+
+
 
 .bottom_label {
     position: inherit !important;
