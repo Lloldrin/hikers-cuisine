@@ -42,9 +42,12 @@ def insert_recipe():
 def edit_recipe():
     return render_template('edit_recipe.html')
 
-@app.route('/view_recipe')
-def view_recipe():
-    return render_template('view_recipe.html')
+@app.route('/view_recipe/<recipe_id>')
+def view_recipe(recipe_id):
+    print(recipe_id)
+    recipe = mongo.db.recipes.find_one({'_id' : ObjectId(recipe_id)})
+    print(recipe)
+    return render_template('view_recipe.html', recipe=recipe)
 
 @app.route('/contact')
 def contact():

@@ -28,6 +28,10 @@ body {
     margin: 0px;
     padding: 5px 20px 5px 5px
 }
+
+.view_left_list {
+    margin: 0px;
+}
 /* ---------- Table Styling ---------- */
 
 td {

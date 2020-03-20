@@ -1,5 +1,52 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>View Recipe</h1>
+
+<h3>{{ recipe.name }}</h3>
+<div class="row">
+
+    <div class="col s12 m4" id="view_recipe_left">
+        <div class="section">
+            <h6>Ingredients</h6>
+            {% for i, ingredient in recipe['ingredients'].items() %}
+            <div class="row view_left_list valign-wrapper">
+                <div class="col s4">{{ingredient['amount']}} {{ingredient['measure']}}</div>
+                <div class="col s8">{{ingredient['name']}}</div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="section">
+            <h6>Equipment</h6>
+            {% for i, equipment in recipe['equipment'].items() %}
+            <div class="row view_left_list valign-wrapper">
+                <div class="col s12">{{equipment['equipment']}}</div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="col s12 m8" id="view_recipe_right">
+        <div class="section">
+            <h6>Preperation</h6>
+            {% for i, preperation in recipe['preperation'].items() %}
+            <div class="row recipe_list">
+                <div class="col s1 right-align"><strong>{{i}}.</strong></div>
+                <div class="col s11 valign-wrapper">{{preperation['preperation']}}</div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="section">
+            <h6>Cooking Steps</h6>
+            {% for i, cooking_steps in recipe['cooking_steps'].items() %}
+            <div class="row recipe_list">
+                <div class="col s1 right-align"><strong>{{i}}.</strong></div>
+                <div class="col s11 valign-wrapper">{{cooking_steps['cooking_step']}}</div>
+            </div>
+            {% endfor %}
+        </div>
+
+
+    </div>
+</div>
 {% endblock %}

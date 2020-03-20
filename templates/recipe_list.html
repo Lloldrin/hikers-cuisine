@@ -10,7 +10,8 @@
             {{recipe.category}} </div>
         <div class="collapsible-body">
             <p> {{recipe.description}}</p>
-            <div><a class="waves-effect waves-light btn-small">View</a></div>
+            <div><a href="{{ url_for('view_recipe', recipe_id=recipe._id) }}" class="waves-effect waves-light btn-small">View</a></div>
+            <div><a href="{{ url_for('delete_recipe', recipe_id=recipe._id) }}" class="waves-effect waves-light btn-small red">Delete</a></div>
         </div>
     </li>
     {% endfor %}
