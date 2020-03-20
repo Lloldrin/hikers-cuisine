@@ -141,9 +141,7 @@ function remove_preperation(preperation_id) {
 
 function preperation_number() {
     i = ($('#current_preperation').prop('childElementCount'))
-    console.log(i)
     for (let step = 0; step <= i; step++) {
-        console.log(step)
         $(`#current_preperation > div:nth-child(${step}) > div:first-child`).text(`${step}.`)
     }
 }
@@ -210,7 +208,37 @@ function check_recipe() {
         'equipment': recipe_equipments,
         'preperation': recipe_preperations,
         'cooking_steps': recipe_cooking_steps,
-        'password': $('#recipe_password').val(),
+        'password': $('#recipe_password').val()
     }
     console.log(current_recipe)
+    console.log(JSON.stringify(current_recipe))
 }
+
+
+
+function submit_recipe() {
+
+    fetch(`${window.origin}/add_recipe/submit_recipe`, {
+      method: "POST",
+      credentials: "include",
+      body: JSON.stringify(current_recipe),
+      cache: "no-cache",
+      headers: new Headers({
+        "content-type": "application/json"
+      })
+    })
+      .then(function (response) {
+        if (response.status !== 200) {
+          console.log(`Looks like there was a problem. Status code: ${response.status}`);
+          return;
+        }
+        response.json().then(function (data) {
+          console.log(data);
+          location.reload()
+        });
+      })
+      .catch(function (error) {
+        console.log("Fetch error: " + error);
+      });
+
+  }

@@ -4,8 +4,6 @@
 <h3>Add Recipe</h3>
 
 <div class="row">
-    <form action="{{url_for('insert_recipe')}}" method="POST" class="col s12">
-
         <h5 class="section_header">General Info</h5>
         <div class="divider"></div>
         <div class="section">
@@ -51,7 +49,7 @@
 
                 <div class="col s12 m6 push-m6">
 
-                    <div class="card teal darken-2">
+                    <div class="card teal">
 
                         <div class="card-content white-text">
                             <span class="card-title">Add Ingredients</span>
@@ -102,7 +100,7 @@
 
                 <div class="col s12 m6 push-m6">
 
-                    <div class="card teal darken-2">
+                    <div class="card teal">
 
                         <div class="card-content white-text">
                             <span class="card-title">Add Equipment</span>
@@ -140,7 +138,7 @@
 
                 <div class="col s12 m6 push-m6">
 
-                    <div class="card teal darken-2">
+                    <div class="card teal">
 
                         <div class="card-content white-text">
                             <span class="card-title">Add Preperation</span>
@@ -179,7 +177,7 @@
 
                 <div class="col s12 m6 push-m6">
 
-                    <div class="card teal darken-2">
+                    <div class="card teal">
 
                         <div class="card-content white-text">
                             <span class="card-title">Add Cooking Step</span>
@@ -218,10 +216,9 @@
         </div>
 
         <div class="col s12">
-            <button class="btn waves-effect waves-light" id="recipe_submit_btn" type="submit" name="action">Add Recipe<i
+            <button class="btn waves-effect waves-light" id="recipe_submit_btn" type="submit" name="action" onClick="submit_recipe()">Add Recipe<i
                     class="material-icons right">playlist_add</i></button>
         </div>
-    </form>
 </div>
 
 {% endblock %}

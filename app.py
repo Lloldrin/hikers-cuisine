@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, redirect, request, url_for
+from flask import Flask, render_template, redirect, request, url_for, jsonify, make_response
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 
@@ -23,6 +23,14 @@ def recipe_list():
 @app.route('/add_recipe')
 def add_recipe():
     return render_template('add_recipe.html', categories=mongo.db.categories.find())
+
+@app.route("/add_recipe/submit_recipe", methods=["POST"])
+def create_entry():
+    req = request.get_json()
+    print(req)
+    res = make_response(jsonify({"message": "OK"}), 200)
+    mongo.db.recipes.insert_one(req)
+    return res
 
 @app.route('/insert_recipe', methods=['POST'])
 def insert_recipe():
