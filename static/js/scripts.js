@@ -217,7 +217,8 @@ function check_recipe() {
 
 
 function submit_recipe() {
-
+    check_recipe()
+    
     fetch(`${window.origin}/add_recipe/submit_recipe`, {
       method: "POST",
       credentials: "include",

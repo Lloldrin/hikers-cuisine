@@ -44,10 +44,13 @@ def edit_recipe():
 
 @app.route('/view_recipe/<recipe_id>')
 def view_recipe(recipe_id):
-    print(recipe_id)
     recipe = mongo.db.recipes.find_one({'_id' : ObjectId(recipe_id)})
-    print(recipe)
     return render_template('view_recipe.html', recipe=recipe)
+
+@app.route('/delete_recipe/<recipe_id>')
+def delete_recipe(recipe_id):
+    mongo.db.recipes.delete_one({'_id' : ObjectId(recipe_id)})
+    return redirect(url_for('recipe_list'))
 
 @app.route('/contact')
 def contact():
