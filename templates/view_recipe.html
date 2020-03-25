@@ -52,7 +52,38 @@
             {% endfor %}
         </div>
 
+        <!-- Delete Function Modal-->
+        <a class="waves-effect waves-light btn-small modal-trigger" href="#modal_edit">Edit Recipe</a>
 
-    </div>
-</div>
-{% endblock %}
+        <a class="waves-effect waves-light btn-small red modal-trigger" href="#modal_del">Delete Recipe</a>
+
+        <!-- Modal Structure -->
+        <div id="modal_edit" class="modal">
+            <div class="modal-content">
+                <div class="row">
+                    <div class="col s12">
+                        <form action="{{ url_for('edit_recipe', recipe_id=recipe._id) }}">
+                            <input id="edit_recipe_pwd" type="text" class="validate" name="edit_recipe_pwd"
+                                placeholder="Enter Recipe Password">
+                            <label for="edit_recipe_pwd">Password</label>
+
+                            <button type="submit" class="waves-effect waves-light btn-small">Edit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="modal_del" class="modal">
+            <div class="modal-content">
+                <div class="row">
+                    <div class="col s12">
+                            <input id="del_recipe_pwd" type="text" class="validate" placeholder="Enter Recipe Password">
+                            <label for="del_recipe_pwd">Password</label>
+                            <a class="waves-effect waves-light btn-small red" onclick="del_recipe()">Delete</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endblock %}

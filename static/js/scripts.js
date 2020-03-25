@@ -210,36 +210,69 @@ function check_recipe() {
         'cooking_steps': recipe_cooking_steps,
         'password': $('#recipe_password').val()
     }
-    console.log(current_recipe)
-    console.log(JSON.stringify(current_recipe))
 }
 
 
 
 function submit_recipe() {
     check_recipe()
-    
-    fetch(`${window.origin}/add_recipe/submit_recipe`, {
-      method: "POST",
-      credentials: "include",
-      body: JSON.stringify(current_recipe),
-      cache: "no-cache",
-      headers: new Headers({
-        "content-type": "application/json"
-      })
-    })
-      .then(function (response) {
-        if (response.status !== 200) {
-          console.log(`Looks like there was a problem. Status code: ${response.status}`);
-          return;
-        }
-        response.json().then(function (data) {
-          console.log(data);
-          location.reload()
-        });
-      })
-      .catch(function (error) {
-        console.log("Fetch error: " + error);
-      });
 
-  }
+    fetch(`${window.location}/submit_recipe`, {
+        method: "POST",
+        credentials: "include",
+        body: JSON.stringify(current_recipe),
+        cache: "no-cache",
+        headers: new Headers({
+            "content-type": "application/json"
+        })
+    })
+        .then(function (response) {
+            if (response.status !== 200) {
+                console.log(`Looks like there was a problem. Status code: ${response.status}`);
+                return;
+            }
+            response.json().then(function (data) {
+                console.log(data);
+                alert('The Recipe Was Added!')
+                window.location = '/recipe_list'
+            });
+        })
+        .catch(function (error) {
+            console.log("Fetch error: " + error);
+        });
+}
+
+// This functions sends a request to the server to delete the recipe from the database
+function del_recipe() {
+    let validation = {'user_input' : $('#del_recipe_pwd').val()}
+
+    fetch(`${window.location}/delete_recipe`, {
+        method: "POST",
+        credentials: "include",
+        body: JSON.stringify(validation),
+        cache: "no-cache",
+        headers: new Headers({
+            "content-type": "application/json"
+        })
+    })
+        .then(function (response) {
+            if (response.status == 200) {
+                response.json().then(function (data) {
+                    console.log(data);
+                    alert('The Recipe Was Deleted!')
+                    window.location = '/recipe_list'
+                });
+            } else if (response.status == 401)  {
+                console.log(`Invalid Password. Status code: ${response.status}`);
+                alert('Invalid Password')
+                return
+            } else {
+                console.log(`Looks like there was a problem. Status code: ${response.status}`);
+                return;
+            }
+            
+        })
+        .catch(function (error) {
+            console.log("Fetch error: " + error);
+        });
+}

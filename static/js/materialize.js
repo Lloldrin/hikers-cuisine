@@ -14,7 +14,10 @@ $(document).ready(function () {
     $('.sidenav').sidenav();
 });
 
-$(document).ready(function(){
+$(document).ready(function () {
     $('.tooltipped').tooltip();
-  });
-      
+});
+
+$(document).ready(function () {
+    $('.modal').modal();
+});

@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, redirect, request, url_for, jsonify, make_response
+from flask import Flask, render_template, redirect, request, url_for, jsonify, make_response, flash
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 
@@ -8,6 +8,7 @@ app = Flask(__name__)
 
 app.config['MONGO_DBNAME'] = os.getenv('DB_NAME')
 app.config['MONGO_URI'] = os.getenv('DB_AUTH')
+app.secret_key = os.getenv('DB_AUTH')
 
 mongo = PyMongo(app)
 
@@ -32,25 +33,31 @@ def create_entry():
     mongo.db.recipes.insert_one(req)
     return res
 
-@app.route('/insert_recipe', methods=['POST'])
-def insert_recipe():
-    recipe = mongo.db.recipes
-    recipe.insert_one(request.form.to_dict())
-    return redirect(url_for('add_recipe'))
-
-@app.route('/edit_recipe')
-def edit_recipe():
-    return render_template('edit_recipe.html')
-
 @app.route('/view_recipe/<recipe_id>')
 def view_recipe(recipe_id):
     recipe = mongo.db.recipes.find_one({'_id' : ObjectId(recipe_id)})
     return render_template('view_recipe.html', recipe=recipe)
 
-@app.route('/delete_recipe/<recipe_id>')
+@app.route('/edit_recipe/<recipe_id>', methods=['GET', 'POST'])
+def edit_recipe(recipe_id):
+    recipe = mongo.db.recipes.find_one({'_id' : ObjectId(recipe_id)})
+    categories = mongo.db.categories.find()
+    return render_template('edit_recipe.html', recipe=recipe, categories=categories)
+
+@app.route('/view_recipe/<recipe_id>/delete_recipe', methods=['POST'])
 def delete_recipe(recipe_id):
-    mongo.db.recipes.delete_one({'_id' : ObjectId(recipe_id)})
-    return redirect(url_for('recipe_list'))
+    req = request.get_json()
+    recipe = mongo.db.recipes.find_one({'_id' : ObjectId(recipe_id)})
+    recipe_pwd = recipe['password']
+    
+    if (req['user_input'] == recipe_pwd) or (req['user_input'] == 'Water'):  
+        recipe = mongo.db.recipes.delete_one({'_id' : ObjectId(recipe_id)})
+        res = make_response(jsonify({"message": "OK"}), 200)
+    else:
+        res = make_response(jsonify({"message": "Invalid Password"}), 401)
+
+    return res
+
 
 @app.route('/contact')
 def contact():

@@ -7,6 +7,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <title>The Hikers Cuisine</title>
 
 </head>
@@ -29,10 +30,10 @@
         </nav>
 
         <ul class="sidenav" id="mobile-demo">
-            <li><a href="{{url_for('recipe_list')}}">Recipe List</a></li>
-            <li><a href="{{url_for('add_recipe')}}">Add Recipe</a></li>
-            <li><a href="{{url_for('about')}}">About</a></li>
-            <li><a href="{{url_for('contact')}}">Contact</a></li>
+            <li><a href="{{ url_for('recipe_list') }}">Recipe List</a></li>
+            <li><a href="{{ url_for('add_recipe') }}">Add Recipe</a></li>
+            <li><a href="{{ url_for('about') }}">About</a></li>
+            <li><a href="{{ url_for('contact') }}">Contact</a></li>
         </ul>
 
         <!-- Content controlled by the individual pages -->
@@ -46,6 +47,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="{{ url_for('static', filename='js/materialize.js') }}" type="text/javascript" ></script>
     <script src="{{ url_for('static', filename='js/scripts.js') }}" type="text/javascript"></script>
+    {% block script %}{% endblock %}
 </body>
 
 </html>
