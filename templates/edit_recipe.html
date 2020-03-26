@@ -1,9 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-<span>{{recipe}}</span>
-<h3 id="recipe_name">{{ recipe.name }}</h3>
+<h3>{{ recipe.name }}</h3>
 
 <div class="row">
     <h5 class="section_header">General Info</h5>
@@ -11,7 +9,7 @@
     <div class="section">
 
         <div class="input-field col s12 m6">
-            <input id="recipe_name" name="recipe_name" type="text" class="validate required">
+            <input id="recipe_name" name="recipe_name" type="text" class="validate required" value=" {{ recipe.name }}">
             <label for="recipe_name">Recipe Name</label>
         </div>
 
@@ -20,8 +18,8 @@
                 <option disabled selected>Choose a Category</option>
                 {% for cat in categories %}
                     {% if cat.category_name == recipe.category %}
-                    <option selected value="{{cat.category_name}}">{{cat.category_name}}</option>
-                    {%else %}
+                    <option value="{{cat.category_name}}" selected>{{cat.category_name}}</option>
+                    {% else %}
                     <option value="{{cat.category_name}}">{{cat.category_name}}</option>
                     {% endif %}
                 {% endfor %}
@@ -32,9 +30,9 @@
         <div class="input-field col s6 m2 required">
             <select id="recipe_servings">
                 {% for i in range(1, 9) %}
-                    {% if i == recipe.servings %}
-                    <option selected value="{{i}}">{{i}}</option>
-                    {%else %}
+                    {% if i == recipe.servings|int %}
+                    <option value="{{i}}" selected>{{i}}</option>
+                    {% else %}
                     <option value="{{i}}">{{i}}</option>
                     {% endif %}
                 {% endfor %}
@@ -44,7 +42,7 @@
 
         <div class="input-field col s12">
             <textarea class="materialize-textarea" id="recipe_description" name="recipe_description" data-length="140"
-                required></textarea>
+                required>{{ recipe.description }} </textarea>
             <label for="recipe_description">Recipe Description</label>
         </div>
 
@@ -208,24 +206,28 @@
     <div class="divider"></div>
 
     <div class="col s12 m4">
-        <input id="recipe_password" type="text" class="validate btn tooltipped" data-position="top"
+        <input id="recipe_password" type="text" class="validate btn tooltipped" value="{{ recipe.password }}" data-position="top"
             data-tooltip="To edit or delete the recipe in the future you need to set a recipe password<br>!! This is <strong>not</strong> stored securely. use something basic !!">
         <label for="recipe_password">Recipe Password</label>
     </div>
 
     <div class="col s12">
-        <form id="add_recipe_form" action="/submit_recipe" method="POST">
-            <input type="hidden" id="add_recipe_json" name="add_recipe_json" value="">
+        <form id="edit_recipe_form" action="{{url_for('submit_edit', recipe_id=recipe._id)}}" method="POST">
+            <input type="hidden" id="edit_recipe_json" name="edit_recipe_json" value="">
         </form>
         <button class="btn waves-effect waves-light" id="recipe_submit_btn" type="submit" name="action"
-            onClick="submit_recipe()">Add Recipe<i class="material-icons right">playlist_add</i></button>
+            onClick="submit_edit()">Edit Recipe<i class="material-icons right">playlist_add</i></button>
     </div>
 </div>
+
+{{ recipe }}
 {% endblock %}
 
 {% block script %}
 <script type="text/javascript">
-    let db_edit_recipe = {{ recipe | tojson}}
+    let db_edit_recipe = {{ json_recipe | tojson}}
     json_edit_recipe = JSON.parse(db_edit_recipe)
+
+    $(document).ready(function() {populate_edit_page()})
 </script>
 {% endblock %}

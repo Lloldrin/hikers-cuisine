@@ -33,7 +33,7 @@ def add_recipe():
 
 @app.route("/submit_recipe", methods=["POST"])
 def create_entry():
-    recipe = json.loads(request.form.get('add_recipe_json'))
+    recipe = loads(request.form.get('add_recipe_json'))
     mongo.db.recipes.insert_one(recipe)
     return redirect('/recipe_list')
 
@@ -53,11 +53,16 @@ def edit_recipe(recipe_id):
     if (input_pw == recipe_pw) or (input_pw == 'Water'):
         json_recipe = dumps(recipe)
         categories = mongo.db.categories.find()
-        return render_template('edit_recipe.html', recipe=json_recipe, categories=categories)
+        return render_template('edit_recipe.html', json_recipe=json_recipe, recipe=recipe, categories=categories)
     else:
         res = make_response(jsonify({"message": "Invalid Password"}), 401)
     return res
 
+@app.route("/submit_edit/<recipe_id>", methods=["POST"])
+def submit_edit(recipe_id):
+    recipe = loads(request.form.get('edit_recipe_json'))
+    mongo.db.recipes.replace_one({'_id': ObjectId(recipe_id)}, recipe)
+    return redirect('/recipe_list')
 
 @app.route('/delete_recipe/<recipe_id>', methods=['POST'])
 def delete_recipe(recipe_id):

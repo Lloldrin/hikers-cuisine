@@ -1,9 +1,16 @@
 /* ---------- Add Recipe ---------- */
 
-/* ----- Add Ingredients ----- */
-
 let ingredient_counter = 0;
+let equipment_counter = 0;
+let preperation_counter = 0;
+let cooking_step_counter = 0;
+
 let recipe_ingredients = {}
+let recipe_equipments = {}
+let recipe_preperations = {}
+let recipe_cooking_steps = {}
+
+/* ----- Add Ingredients ----- */
 
 // When clicked this button runs the more_ingredients function.
 $('#add_ingredients_btn').click(function () {
@@ -45,9 +52,6 @@ function remove_ingredient(ingredient_id) {
 }
 
 /* ----- Add Equipment ----- */
-
-let equipment_counter = 0;
-let recipe_equipments = {}
 
 // When clicked this button runs the more_equipment function.
 $('#add_equipment_btn').click(function () {
@@ -97,8 +101,7 @@ function equipment_number() {
 
 /* ----- Add Preperations ----- */
 
-let preperation_counter = 0;
-let recipe_preperations = {}
+
 
 // When clicked this button runs the more_preperation function.
 $('#add_preperation_btn').click(function () {
@@ -148,8 +151,7 @@ function preperation_number() {
 
 /* ----- Add Cooking Steps ----- */
 
-let cooking_step_counter = 0;
-let recipe_cooking_steps = {}
+
 
 // When clicked this button runs the more_cooking_step function.
 $('#add_cooking_step_btn').click(function () {
@@ -218,7 +220,13 @@ function submit_recipe() {
     check_recipe()
     $('#add_recipe_json').val(JSON.stringify(current_recipe))
     $('#add_recipe_form').submit()
+}
 
+function submit_edit() {
+    check_recipe()
+    $('#edit_recipe_json').val(JSON.stringify(current_recipe))
+    $('#edit_recipe_form').submit()
+}
     // fetch(`${window.location}/submit_recipe`, {
     //     method: "POST",
     //     credentials: "include",
@@ -228,21 +236,21 @@ function submit_recipe() {
     //         "content-type": "application/json"
     //     })
     // })
-        // .then(function (response) {
-        //     if (response.status !== 200) {
-        //         console.log(`Looks like there was a problem. Status code: ${response.status}`);
-        //         return;
-        //     }
-        //     response.json().then(function (data) {
-        //         console.log(data);
-        //         alert('The Recipe Was Added!')
-        //         window.location = '/recipe_list'
-        //     });
-        // })
-        // .catch(function (error) {
-        //     console.log("Fetch error: " + error);
-        // });
-}
+    // .then(function (response) {
+    //     if (response.status !== 200) {
+    //         console.log(`Looks like there was a problem. Status code: ${response.status}`);
+    //         return;
+    //     }
+    //     response.json().then(function (data) {
+    //         console.log(data);
+    //         alert('The Recipe Was Added!')
+    //         window.location = '/recipe_list'
+    //     });
+    // })
+    // .catch(function (error) {
+    //     console.log("Fetch error: " + error);
+    // });
+
 
 // This functions sends a request to the server to delete the recipe from the database
 function edit_recipe() {
@@ -252,40 +260,103 @@ function edit_recipe() {
 function del_recipe() {
     $('#del_recipe_form').submit()
 }
-    // let validation = {'user_input' : $('#del_recipe_pwd').val()}
+// let validation = {'user_input' : $('#del_recipe_pwd').val()}
 
-    // fetch(`${window.location}/delete_recipe`, {
-    //     method: "POST",
-    //     credentials: "include",
-    //     body: JSON.stringify(validation),
-    //     cache: "no-cache",
-    //     headers: new Headers({
-    //         "content-type": "application/json"
-    //     })
-    // })
-        // .then(function (response) {
-        //     if (response.status == 200) {
-        //         response.json().then(function (data) {
-        //             console.log(data);
-        //             alert('The Recipe Was Deleted!')
-        //             window.location = '/recipe_list'
-        //         });
-        //     } else if (response.status == 401)  {
-        //         console.log(`Invalid Password. Status code: ${response.status}`);
-        //         alert('Invalid Password')
-        //         return
-        //     } else {
-        //         console.log(`Looks like there was a problem. Status code: ${response.status}`);
-        //         return;
-        //     }
-            
-        // })
-        // .catch(function (error) {
-        //     console.log("Fetch error: " + error);
-        // });
+// fetch(`${window.location}/delete_recipe`, {
+//     method: "POST",
+//     credentials: "include",
+//     body: JSON.stringify(validation),
+//     cache: "no-cache",
+//     headers: new Headers({
+//         "content-type": "application/json"
+//     })
+// })
+// .then(function (response) {
+//     if (response.status == 200) {
+//         response.json().then(function (data) {
+//             console.log(data);
+//             alert('The Recipe Was Deleted!')
+//             window.location = '/recipe_list'
+//         });
+//     } else if (response.status == 401)  {
+//         console.log(`Invalid Password. Status code: ${response.status}`);
+//         alert('Invalid Password')
+//         return
+//     } else {
+//         console.log(`Looks like there was a problem. Status code: ${response.status}`);
+//         return;
+//     }
+
+// })
+// .catch(function (error) {
+//     console.log("Fetch error: " + error);
+// });
 
 
 /* ---------- Edit Recipe ---------- */
 
+function populate_edit_page() {
+    populate_edit_ingredients()
+    populate_edit_equipment()
+    populate_edit_preperation()
+    populate_edit_cooking_step()
+}
 
+function populate_edit_ingredients() {
+    for (i in json_edit_recipe['ingredients']) {
+        let ingredient = json_edit_recipe['ingredients'][i]
+        $('#current_ingredients').append(`
+        <div class="row grey lighten-3 recipe_list valign-wrapper" id="ingredient_${ingredient_counter}">
+        <div class="col s3">${ingredient['amount'] + ' ' + ingredient['measure']}</div>
+        <div class="col s8">${ingredient['name']}</div>
+        <div class="col s1"><a class="btn-floating btn-small waves-effect waves-light transparent table_btn" id="remove_ingredient_${ingredient_counter}" onClick="remove_ingredient(this.id)"><i class="material-icons blue-grey-text">close</i></a></div>
+        </div>`)
+        recipe_ingredient(ingredient, ingredient_counter)
+        ingredient_counter++
+    }
+}
 
+function populate_edit_equipment() {
+    for (i in json_edit_recipe['equipment']) {
+        let equipment = json_edit_recipe['equipment'][i]
+        $('#current_equipment').append(`
+        <div class="row grey lighten-3 recipe_list valign-wrapper" id="equipment_${equipment_counter}">
+        <div class="col s1"></div>
+        <div class="col s10">${equipment['equipment']}</div>
+        <div class="col s1"><a class="btn-floating btn-small waves-effect waves-light transparent table_btn" id="remove_equipment_${equipment_counter}" onClick="remove_equipment(this.id)"><i class="material-icons blue-grey-text">close</i></a></div>
+        </div>
+        `)
+        recipe_equipment(equipment['equipment'], equipment_counter)
+        equipment_counter++;
+    }
+}
+
+function populate_edit_preperation() {
+    for (i in json_edit_recipe['preperation']) {
+        let preperation = json_edit_recipe['preperation'][i]
+        $('#current_preperation').append(`
+        <div class="row grey lighten-3 recipe_list valign-wrapper" id="preperation_${preperation_counter}">
+        <div class="col s1"></div>
+        <div class="col s10">${preperation['preperation']}</div>
+        <div class="col s1"><a class="btn-floating btn-small waves-effect waves-light transparent table_btn" id="remove_preperation_${preperation_counter}" onClick="remove_preperation(this.id)"><i class="material-icons blue-grey-text">close</i></a></div>
+        </div>
+        `)
+        recipe_preperation(preperation['preperation'], preperation_counter)
+        preperation_counter++;
+    }
+}
+
+function populate_edit_cooking_step() {
+    for (i in json_edit_recipe['cooking_steps']) {
+        let cooking_step = json_edit_recipe['cooking_steps'][i]
+        $('#current_cooking_step').append(`
+        <div class="row grey lighten-3 recipe_list valign-wrapper" id="cooking_step_${cooking_step_counter}">
+        <div class="col s1"></div>
+        <div class="col s10">${cooking_step['cooking_step']}</div>
+        <div class="col s1"><a class="btn-floating btn-small waves-effect waves-light transparent table_btn" id="remove_cooking_step_${cooking_step_counter}" onClick="remove_cooking_step(this.id)"><i class="material-icons blue-grey-text">close</i></a></div> 
+        </div>
+        `)
+        recipe_cooking_step(cooking_step['cooking_step'], cooking_step_counter)
+        cooking_step_counter++;
+    }
+}
