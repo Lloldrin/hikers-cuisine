@@ -29,9 +29,9 @@ def add_recipe():
 def create_entry():
     req = request.get_json()
     print(req)
-    res = make_response(jsonify({"message": "OK"}), 200)
+    # res = make_response(jsonify({"message": "OK"}), 200)
     mongo.db.recipes.insert_one(req)
-    return res
+    return redirect('/recipe_list')
 
 @app.route('/view_recipe/<recipe_id>')
 def view_recipe(recipe_id):
@@ -52,7 +52,7 @@ def delete_recipe(recipe_id):
     
     if (req['user_input'] == recipe_pwd) or (req['user_input'] == 'Water'):  
         recipe = mongo.db.recipes.delete_one({'_id' : ObjectId(recipe_id)})
-        res = make_response(jsonify({"message": "OK"}), 200)
+        return redirect(url_for('recipe_list'))
     else:
         res = make_response(jsonify({"message": "Invalid Password"}), 401)
 

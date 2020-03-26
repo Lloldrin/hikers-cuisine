@@ -216,30 +216,32 @@ function check_recipe() {
 
 function submit_recipe() {
     check_recipe()
+    $('#add_recipe_json').val(JSON.stringify(current_recipe))
+    $('#add_recipe_form').submit()
 
-    fetch(`${window.location}/submit_recipe`, {
-        method: "POST",
-        credentials: "include",
-        body: JSON.stringify(current_recipe),
-        cache: "no-cache",
-        headers: new Headers({
-            "content-type": "application/json"
-        })
-    })
-        .then(function (response) {
-            if (response.status !== 200) {
-                console.log(`Looks like there was a problem. Status code: ${response.status}`);
-                return;
-            }
-            response.json().then(function (data) {
-                console.log(data);
-                alert('The Recipe Was Added!')
-                window.location = '/recipe_list'
-            });
-        })
-        .catch(function (error) {
-            console.log("Fetch error: " + error);
-        });
+    // fetch(`${window.location}/submit_recipe`, {
+    //     method: "POST",
+    //     credentials: "include",
+    //     body: JSON.stringify(current_recipe),
+    //     cache: "no-cache",
+    //     headers: new Headers({
+    //         "content-type": "application/json"
+    //     })
+    // })
+        // .then(function (response) {
+        //     if (response.status !== 200) {
+        //         console.log(`Looks like there was a problem. Status code: ${response.status}`);
+        //         return;
+        //     }
+        //     response.json().then(function (data) {
+        //         console.log(data);
+        //         alert('The Recipe Was Added!')
+        //         window.location = '/recipe_list'
+        //     });
+        // })
+        // .catch(function (error) {
+        //     console.log("Fetch error: " + error);
+        // });
 }
 
 // This functions sends a request to the server to delete the recipe from the database
@@ -255,24 +257,24 @@ function del_recipe() {
             "content-type": "application/json"
         })
     })
-        .then(function (response) {
-            if (response.status == 200) {
-                response.json().then(function (data) {
-                    console.log(data);
-                    alert('The Recipe Was Deleted!')
-                    window.location = '/recipe_list'
-                });
-            } else if (response.status == 401)  {
-                console.log(`Invalid Password. Status code: ${response.status}`);
-                alert('Invalid Password')
-                return
-            } else {
-                console.log(`Looks like there was a problem. Status code: ${response.status}`);
-                return;
-            }
+        // .then(function (response) {
+        //     if (response.status == 200) {
+        //         response.json().then(function (data) {
+        //             console.log(data);
+        //             alert('The Recipe Was Deleted!')
+        //             window.location = '/recipe_list'
+        //         });
+        //     } else if (response.status == 401)  {
+        //         console.log(`Invalid Password. Status code: ${response.status}`);
+        //         alert('Invalid Password')
+        //         return
+        //     } else {
+        //         console.log(`Looks like there was a problem. Status code: ${response.status}`);
+        //         return;
+        //     }
             
-        })
-        .catch(function (error) {
-            console.log("Fetch error: " + error);
-        });
+        // })
+        // .catch(function (error) {
+        //     console.log("Fetch error: " + error);
+        // });
 }
