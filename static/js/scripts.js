@@ -245,18 +245,24 @@ function submit_recipe() {
 }
 
 // This functions sends a request to the server to delete the recipe from the database
-function del_recipe() {
-    let validation = {'user_input' : $('#del_recipe_pwd').val()}
+function edit_recipe() {
+    $('#edit_recipe_form').submit()
+}
 
-    fetch(`${window.location}/delete_recipe`, {
-        method: "POST",
-        credentials: "include",
-        body: JSON.stringify(validation),
-        cache: "no-cache",
-        headers: new Headers({
-            "content-type": "application/json"
-        })
-    })
+function del_recipe() {
+    $('#del_recipe_form').submit()
+}
+    // let validation = {'user_input' : $('#del_recipe_pwd').val()}
+
+    // fetch(`${window.location}/delete_recipe`, {
+    //     method: "POST",
+    //     credentials: "include",
+    //     body: JSON.stringify(validation),
+    //     cache: "no-cache",
+    //     headers: new Headers({
+    //         "content-type": "application/json"
+    //     })
+    // })
         // .then(function (response) {
         //     if (response.status == 200) {
         //         response.json().then(function (data) {
@@ -277,4 +283,9 @@ function del_recipe() {
         // .catch(function (error) {
         //     console.log("Fetch error: " + error);
         // });
-}
+
+
+/* ---------- Edit Recipe ---------- */
+
+
+
