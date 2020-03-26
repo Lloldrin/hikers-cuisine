@@ -49,7 +49,7 @@ def edit_recipe(recipe_id):
     input_pw = request.form.get('edit_recipe_pw')
     recipe = mongo.db.recipes.find_one({'_id': ObjectId(recipe_id)})
     recipe_pw = recipe['password']
-    print(input_pw)
+    
     if (input_pw == recipe_pw) or (input_pw == 'Water'):
         json_recipe = dumps(recipe)
         categories = mongo.db.categories.find()
@@ -69,7 +69,7 @@ def delete_recipe(recipe_id):
     input_pw = request.form.get('del_recipe_pw')
     recipe = mongo.db.recipes.find_one({'_id': ObjectId(recipe_id)})
     recipe_pw = recipe['password']
-    print(input_pw)
+
     if (input_pw == recipe_pw) or (input_pw == 'Water'):
         recipe = mongo.db.recipes.delete_one({'_id': ObjectId(recipe_id)})
         return redirect(url_for('recipe_list'))

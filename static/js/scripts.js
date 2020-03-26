@@ -214,8 +214,6 @@ function check_recipe() {
     }
 }
 
-
-
 function submit_recipe() {
     check_recipe()
     $('#add_recipe_json').val(JSON.stringify(current_recipe))

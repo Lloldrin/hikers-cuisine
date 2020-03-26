@@ -17,7 +17,7 @@
 
         <!-- Navigation Bar -->
         <nav>
-            <div class="nav-wrapper">
+            <div class="nav-wrapper teal">
                 <a href="{{url_for('index')}}" class="brand-logo">Logo</a>
                 <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
                 <ul id="nav-mobile" class="right hide-on-med-and-down sidenav-trigger">
@@ -29,11 +29,11 @@
             </div>
         </nav>
 
-        <ul class="sidenav" id="mobile-demo">
-            <li><a href="{{ url_for('recipe_list') }}">Recipe List</a></li>
-            <li><a href="{{ url_for('add_recipe') }}">Add Recipe</a></li>
-            <li><a href="{{ url_for('about') }}">About</a></li>
-            <li><a href="{{ url_for('contact') }}">Contact</a></li>
+        <ul class="sidenav teal" id="mobile-demo">
+            <li><a class="white-text" href="{{ url_for('recipe_list') }}">Recipe List</a></li>
+            <li><a class="white-text" href="{{ url_for('add_recipe') }}">Add Recipe</a></li>
+            <li><a class="white-text" href="{{ url_for('about') }}">About</a></li>
+            <li><a class="white-text" href="{{ url_for('contact') }}">Contact</a></li>
         </ul>
 
         <!-- Content controlled by the individual pages -->
