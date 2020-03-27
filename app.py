@@ -35,6 +35,7 @@ def add_recipe():
 def create_entry():
     recipe = loads(request.form.get('add_recipe_json'))
     mongo.db.recipes.insert_one(recipe)
+    #look into adding a flash
     return redirect('/recipe_list')
 
 
