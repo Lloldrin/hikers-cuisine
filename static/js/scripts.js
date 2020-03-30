@@ -24,6 +24,9 @@ function more_ingredients() {
     add_ingredient.amount = $('#add_ingredient_amount').val()
     add_ingredient.measure = $('#add_ingredient_measure').val()
     add_ingredient.name = $('#add_ingredient_name').val();
+    $('#add_ingredient_amount').val('')
+    $('#add_ingredient_measure').val('-')
+    $('#add_ingredient_name').val('');
 
     if (add_ingredient.amount != "" && add_ingredient.measure != "" && add_ingredient.name != "") {
         $('#current_ingredients').append(`
@@ -61,7 +64,8 @@ $('#add_equipment_btn').click(function () {
 // This listens for the user to submit equipment and creates a row in the #current_equipment table. It also creates a button for the user to remove the equipment from the table.
 function more_equipment() {
 
-    equipment_name = document.getElementById('add_equipment').value
+    equipment_name = $('#add_equipment').val()
+    $('#add_equipment').val('')
 
     if (equipment_name != "") {
         $('#current_equipment').append(`
@@ -111,7 +115,8 @@ $('#add_preperation_btn').click(function () {
 // This listens for the user to submit preperation and creates a row in the #current_preperation table. It also creates a button for the user to remove the preperation from the table.
 function more_preperation() {
 
-    preperation_name = document.getElementById('add_preperation').value
+    preperation_name = $('#add_preperation').val()
+    $('#add_preperation').val('')
 
     if (preperation_name != "") {
         $('#current_preperation').append(`
@@ -161,7 +166,8 @@ $('#add_cooking_step_btn').click(function () {
 // This listens for the user to submit cooking_step and creates a row in the #current_cooking_step table. It also creates a button for the user to remove the cooking_step from the table.
 function more_cooking_step() {
 
-    cooking_step_name = document.getElementById('add_cooking_step').value
+    cooking_step_name = $('#add_cooking_step').val()
+    $('#add_cooking_step').val('')
 
     if (cooking_step_name != "") {
         $('#current_cooking_step').append(`

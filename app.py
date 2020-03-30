@@ -79,17 +79,6 @@ def delete_recipe(recipe_id):
         res = make_response(jsonify({"message": "Invalid Password"}), 401)
     return res
 
-
-@app.route('/contact')
-def contact():
-    return render_template('contact.html')
-
-
-@app.route('/about')
-def about():
-    return render_template('about.html')
-
-
 if __name__ == '__main__':
     app.run(
         host=os.environ.get('IP'),

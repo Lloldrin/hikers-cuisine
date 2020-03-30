@@ -61,8 +61,8 @@
                         <span class="card-title">Add Ingredients</span>
                         <div class="row card_row">
                             <div class="col s6 m6">
-                                <input id="add_ingredient_amount" type="text" class="validate" form="null">
-                                <label for="add_ingredient_amount">Amount</label>
+                                <input id="add_ingredient_amount" type="text" class="validate style_input" form="null">
+                                <label for="add_ingredient_amount" class="style_input_label">Amount</label>
                             </div>
 
                             <div class="col s6 m6">
@@ -80,8 +80,8 @@
                             </div>
 
                             <div class="col s12 m12 l6">
-                                <input id="add_ingredient_name" type="text" class="validate" form="null">
-                                <label for="add_ingredient_name">Ingredient</label>
+                                <input id="add_ingredient_name" type="text" class="validate style_input" form="null">
+                                <label for="add_ingredient_name" class="style_input_label">Ingredient</label>
                             </div>
                         </div>
                     </div>
@@ -113,8 +113,8 @@
 
                         <div class="row card_row">
                             <div class="col s12">
-                                <input id="add_equipment" type="text" class="validate" form="null">
-                                <label for="add_equipment">Equipment</label>
+                                <input id="add_equipment" type="text" class="validate style_input" form="null">
+                                <label for="add_equipment" class="style_input_label">Equipment</label>
                             </div>
                         </div>
 
@@ -147,9 +147,9 @@
 
                         <div class="row card_row">
                             <div class="col s12">
-                                <textarea class="materialize-textarea" id="add_preperation" type="text" class="validate"
+                                <textarea class="materialize-textarea validate style_input" id="add_preperation" type="text"
                                     form="null"></textarea>
-                                <label for="add_preperation">Preperation</label>
+                                <label for="add_preperation" class="style_input_label">Preperation</label>
                             </div>
                         </div>
 
@@ -182,9 +182,8 @@
 
                         <div class="row card_row">
                             <div class="col s12">
-                                <textarea class="materialize-textarea" id="add_cooking_step" type="text"
-                                    class="validate" form="null"></textarea>
-                                <label for="add_cooking_step">Cooking Step</label>
+                                <textarea class="materialize-textarea style_input" id="add_cooking_step" type="text" form="null"></textarea>
+                                <label for="add_cooking_step" class="style_input_label">Cooking Step</label>
                             </div>
                         </div>
 
@@ -205,7 +204,7 @@
     <div class="divider"></div>
 
     <div class="col s12 m4">
-        <input id="recipe_password" type="text" class="validate btn tooltipped black-text" data-position="top"
+        <input id="recipe_password" type="text" class="validate tooltipped" data-position="top"
             data-tooltip="To edit or delete the recipe in the future you need to set a recipe password<br>!! This is <strong>not</strong> stored securely. use something basic !!">
         <label for="recipe_password">Recipe Password</label>
     </div>

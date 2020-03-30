@@ -85,6 +85,15 @@ body {
 .view_recipe_btn_row {
     padding-right: 0.75rem;
 }
+
+.style_input{
+    border-bottom: 1px solid white !important;
+}
+
+.style_input_label{
+    color:white;
+}
+
 /* ---------- Table Styling ---------- */
 
 .view_left_title {
@@ -117,3 +126,4 @@ body {
       height: 56px;
     }
   }
+
