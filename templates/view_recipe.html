@@ -5,12 +5,15 @@
 <h3>{{ recipe.name }}</h3>
 <div class="row">
 
-    <div class="col s12 m4" id="view_recipe_left">
+    <div class="col s12 m5 l4" id="view_recipe_left">
         <div class="card teal">
             <div class="card-content white-text">
 
+                <div class="view_recipe_img" style="background-image: url('{{recipe.img_url}}');"></div>
 
-                <span class="card-title">Ingredients</span>
+                <div class="divider"></div>
+
+                <span class="card-title view_left_title">Ingredients</span>
                 {% for i, ingredient in recipe['ingredients'].items() %}
                 <div class="row view_left_list valign-wrapper">
                     <div class="col s4">{{ingredient['amount']}} {{ingredient['measure']}}</div>
@@ -18,9 +21,7 @@
                 </div>
                 {% endfor %}
 
-                <div class="divider"></div>
-
-                <span class="card-title">Equipment</span>
+                <span class="card-title view_left_title">Equipment</span>
                 {% for i, equipment in recipe['equipment'].items() %}
                 <div class="row view_left_list valign-wrapper">
                     <div class="col s12">{{equipment['equipment']}}</div>
@@ -31,39 +32,49 @@
         </div>
     </div>
 
-    <div class="col s12 m8" id="view_recipe_right">
-        <div class="section">
-            <h6>Preperation</h6>
-            {% for i, preperation in recipe['preperation'].items() %}
-            <div class="row recipe_list">
-                <div class="col s1 right-align"><strong>{{i}}.</strong></div>
-                <div class="col s11 valign-wrapper">{{preperation['preperation']}}</div>
-            </div>
-            {% endfor %}
-        </div>
+    <div class="col s12 m7 l8" id="view_recipe_right">
+        <div class="card">
+            <div class="card-content">
 
-        <div class="section">
-            <h6>Cooking Steps</h6>
-            {% for i, cooking_steps in recipe['cooking_steps'].items() %}
-            <div class="row recipe_list">
-                <div class="col s1 right-align"><strong>{{i}}.</strong></div>
-                <div class="col s11 valign-wrapper">{{cooking_steps['cooking_step']}}</div>
+                <span class="card-title">Preperation</span>
+                {% for i, preperation in recipe['preperation'].items() %}
+                <div class="row recipe_list">
+                    <div class="col s1 right-align"><strong>{{i}}.</strong></div>
+                    <div class="col s11 valign-wrapper">{{preperation['preperation']}}</div>
+                </div>
+                {% endfor %}
+
+                <span class="card-title">Cooking Steps</span>
+                {% for i, cooking_steps in recipe['cooking_steps'].items() %}
+                <div class="row recipe_list">
+                    <div class="col s1 right-align"><strong>{{i}}.</strong></div>
+                    <div class="col s11 valign-wrapper">{{cooking_steps['cooking_step']}}</div>
+                </div>
+                {% endfor %}
+
             </div>
-            {% endfor %}
         </div>
 
         <!-- Delete Function Modal-->
-        <a class="waves-effect waves-light btn-small modal-trigger" href="#modal_edit">Edit Recipe</a>
+        <div class="row">
 
-        <a class="waves-effect waves-light btn-small red modal-trigger" href="#modal_del">Delete Recipe</a>
+            <div class="view_recipe_btn_row right-align">
+                <a class="waves-effect waves-light btn-small modal-trigger" href="#modal_edit">Edit
+                    Recipe</a>
 
+                <a class="waves-effect waves-light btn-small red modal-trigger right-align" href="#modal_del">Delete
+                    Recipe</a>
+            </div>
+        </div>
         <!-- Modal Structure -->
         <div id="modal_edit" class="modal">
             <div class="modal-content">
                 <div class="row">
                     <div class="col s12">
-                        <form action="{{ url_for('edit_recipe', recipe_id=recipe._id) }}" method="POST" id="edit_recipe_form">
-                            <input id="edit_recipe_pw" name="edit_recipe_pw" type="text" class="validate" placeholder="Enter Recipe Password">
+                        <form action="{{ url_for('edit_recipe', recipe_id=recipe._id) }}" method="POST"
+                            id="edit_recipe_form">
+                            <input id="edit_recipe_pw" name="edit_recipe_pw" type="text" class="validate"
+                                placeholder="Enter Recipe Password">
                             <label for="edit_recipe_pwd">Password</label>
                             <div class="row">
                                 <a class="waves-effect waves-light btn-small" onclick="edit_recipe()">Edit</a>
@@ -78,8 +89,10 @@
             <div class="modal-content">
                 <div class="row">
                     <div class="col s12">
-                        <form action="{{ url_for('delete_recipe', recipe_id=recipe._id) }}" method="POST" id="del_recipe_form">
-                            <input id="del_recipe_pw" name="del_recipe_pw" type="text" class="validate" placeholder="Enter Recipe Password">
+                        <form action="{{ url_for('delete_recipe', recipe_id=recipe._id) }}" method="POST"
+                            id="del_recipe_form">
+                            <input id="del_recipe_pw" name="del_recipe_pw" type="text" class="validate"
+                                placeholder="Enter Recipe Password">
                             <label for="del_recipe_pwd">Password</label>
                             <div class="row">
                                 <a class="waves-effect waves-light btn-small red" onclick="del_recipe()">Delete</a>

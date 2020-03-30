@@ -205,6 +205,7 @@ function check_recipe() {
         'name': $('#recipe_name').val(),
         'category': $('#recipe_category').val(),
         'servings': $('#recipe_servings').val(),
+        'img_url': $('#recipe_img').val(),
         'description': $('#recipe_description').val(),
         'ingredients': recipe_ingredients,
         'equipment': recipe_equipments,

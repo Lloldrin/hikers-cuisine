@@ -34,7 +34,13 @@
         </div>
 
         <div class="input-field col s12">
-            <textarea class="materialize-textarea" id="recipe_description" name="recipe_description" data-length="140"
+            <input id="recipe_img" name="recipe_img" type="text" class="validate required tooltipped" data-position="top"
+            data-tooltip="Insert the URL of an image to add it to the recipe. </br>Make sure that you have the reight to use the image that you submit.</br></br>Example: https://images.pexels.com/photos/890507/pexels-photo-890507.jpeg">
+            <label for="recipe_img">Image URL</label>
+        </div>
+
+        <div class="input-field col s12">
+            <textarea class="materialize-textarea" id="recipe_description" name="recipe_description" data-length="200"
                 required></textarea>
             <label for="recipe_description">Recipe Description</label>
         </div>
