@@ -223,23 +223,21 @@ function check_recipe() {
     };
 }
 
+// This functions sends an recipe to the server so it can add it to the database
 function submit_recipe() {
     check_recipe();
     $('#add_recipe_json').val(JSON.stringify(current_recipe));
     $('#add_recipe_form').submit();
 }
 
+// This functions sends an edited recipe to the server so it can update the database
 function submit_edit() {
     check_recipe();
     $('#edit_recipe_json').val(JSON.stringify(current_recipe));
     $('#edit_recipe_form').submit();
 }
 
-// This functions sends a request to the server to delete the recipe from the database
-function edit_recipe() {
-    $('#edit_recipe_form').submit();
-}
-
+// This functions sends an an order to the server to delete the recipe from the database
 function del_recipe() {
     $('#del_recipe_form').submit();
 }
