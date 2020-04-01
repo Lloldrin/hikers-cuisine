@@ -83,23 +83,23 @@ The website has been tested in the following ways:
 
 ### Automated Tests
 
-* **![HTML Validator](https://www.freeformatter.com/html-validator.html)**
+* **[HTML Validator](https://www.freeformatter.com/html-validator.html)**
     * The HTML gives several errors. These are all related to the use of Jinja. 
         * **Example:** 'Bad value “{{ url_for('view_recipe', recipe_id=recipe._id) }}” for attribute “href” on element “a”: Illegal character in path segment: “{” is not allowed.'  <- Is valid use of Jinja, but the validator has issues. The other bugs shown in validator has been fixed. 
         * It also has issues as most paged don't have a doctype, <head> or <body> as those are inherited from the base.html
 
-* **![CSS Validator](https://jigsaw.w3.org/css-validator/validator)**
+* **[CSS Validator](https://jigsaw.w3.org/css-validator/validator)**
     * Passed with no errors.
 
-* **![CSS Linter](http://csslint.net/)**
+* **[CSS Linter](http://csslint.net/)**
     * Gives warnings.
         * Don't use IDs in selectors. (I use ID's to target with JS and I also want to target specific things in CSS, I could add a class but it would be a unneccesary complication of the page)
         * Disallow overqualified elements. (If I try the linters recomendation I get an error.)
 
-* **![JS Validator](https://jshint.com/)**
+* **[JS Validator](https://jshint.com/)**
     * Passed with errors. The errors are semantic and I perfer the code the way it is. (saying dot notation is preferable etc.)
 
-* **![Responsive Tester](https://www.responsinator.com/?url=https%3A%2F%2Fmilestone-3-hikers-cuisine.herokuapp.com%2Findex)**
+* **[Responsive Tester](https://www.responsinator.com/?url=https%3A%2F%2Fmilestone-3-hikers-cuisine.herokuapp.com%2Findex)**
     * Showed an error with the navigation buttons on the hero image. Fixed. 
 
 ### User Testing
