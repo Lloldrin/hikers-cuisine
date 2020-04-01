@@ -5,7 +5,7 @@ body {
 .nav-wrapper .brand-logo img {
     width: 55px;
     height: auto;
-    margin: 4px 4px 0px 4px;
+    margin: 4px 4px 0 4px;
   }
 
 #hero_img {
@@ -22,13 +22,13 @@ body {
 }
 
 .card_row {
-    margin-bottom: 0px;
+    margin-bottom: 0;
 }
 
 /* ---------- General Styling ---------- */
 
 .section_header {
-    padding: 10px 0px;
+    padding: 10px 0;
 }
 
 .select-wrapper input.select-dropdown{
@@ -44,12 +44,12 @@ body {
 }
 
 .recipe_list {
-    margin: 0px;
+    margin: 0;
     padding: 5px 20px 5px 5px
 }
 
 .view_left_list {
-    margin: 0px;
+    margin: 0;
 }
 
 .recipe_list_image{
@@ -60,7 +60,7 @@ body {
 }
 
 .btn-floating.halfway-fab.recipe_list_extend {
-    bottom: 0px;
+    bottom: 0;
     right: 5%;
     margin-bottom: 5px;
 }
@@ -68,7 +68,7 @@ body {
 .recipe_list_chip {
     position: absolute;
     left: 5%;
-    bottom: 0px;
+    bottom: 0;
 }
 
 .view_recipe_img {
@@ -79,7 +79,7 @@ body {
     background-size: cover;
     background-repeat: no-repeat;
     overflow: hidden;
-    margin: 0px auto 20px auto;
+    margin: 0 auto 20px auto;
 }
 
 .view_recipe_btn_row {
@@ -111,8 +111,9 @@ body {
 /* ---------- Button Styling --------- */
 
 .table_btn {
-    box-shadow: none;
+    -moz-box-shadow: none;
     -webkit-box-shadow: none;
+    box-shadow: none;
 }
 
 #recipe_submit_btn {

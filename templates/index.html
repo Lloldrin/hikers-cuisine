@@ -5,10 +5,12 @@
 <div id="hero_img" class="valign-wrapper">
     <div class="row">
         <div class="col s12 m6">
-            <a class="waves-effect waves-teal btn-large white teal-text hero_btn" href="{{url_for('recipe_list')}}">Check out our Recipes!</a>
+            <a class="waves-effect waves-teal btn-large white teal-text hero_btn"
+                href="{{url_for('recipe_list')}}">Check out our Recipes!</a>
         </div>
         <div class="col s12 m6">
-            <a class="waves-effect waves-teal btn-large white teal-text hero_btn" href="{{url_for('add_recipe')}}">Add a new recipe!</a>
+            <a class="waves-effect waves-teal btn-large white teal-text hero_btn" href="{{url_for('add_recipe')}}">Add a
+                new recipe!</a>
         </div>
     </div>
 </div>
@@ -18,39 +20,40 @@
     {% for recipe in recipes[:3] %}
     {% if loop.index == 3 %}
     <div class="col l4 hide-on-med-and-down">
-    {% else %}
-    <div class="col s12 m6 l4">
-    {% endif %}
-        <div class="card medium sticky-action">
+        {% else %}
+        <div class="col s12 m6 l4">
+            {% endif %}
+            <div class="card medium sticky-action">
 
-            <div class="card-image recipe_list_image" style="background-image: url('{{ recipe.img_url }}')">
-                <div class="chip teal white-text recipe_list_chip"><span>{{ recipe.category }}</span></div>
-                <a class="btn-floating halfway-fab waves-effect waves-light teal recipe_list_extend activator"><i
-                        class="material-icons">more_vert</i></a>
-            </div>
+                <div class="card-image recipe_list_image" style="background-image: url('{{ recipe.img_url }}'), url('https://www.publicdomainpictures.net/pictures/20000/velka/hiking-path-1-238412973779541Zf.jpg')">
+                    <div class="chip teal white-text recipe_list_chip"><span>{{ recipe.category }}</span></div>
+                    <a class="btn-floating halfway-fab waves-effect waves-light teal recipe_list_extend activator"><i
+                            class="material-icons">more_vert</i></a>
+                </div>
 
-            <div class="card-content">
-                <span class="card-title">{{ recipe.name }}</span>
-                <p>{{ recipe.description }}</p>
-            </div>
-
-            <div class="card-reveal">
-                <span class="card-title grey-text text-darken-4">{{ recipe.name }}<i
-                        class="material-icons right">close</i></span>
-                <div class="section">
+                <div class="card-content">
+                    <span class="card-title">{{ recipe.name }}</span>
                     <p>{{ recipe.description }}</p>
                 </div>
-                <div class="chip teal white-text"><span>{{ recipe.category }}</span></div>
-            </div>
 
-            <div class="card-action">
-                <a href="{{ url_for('view_recipe', recipe_id=recipe._id) }}">View Recipe</a>
-            </div>
+                <div class="card-reveal">
+                    <span class="card-title grey-text text-darken-4">{{ recipe.name }}<i
+                            class="material-icons right">close</i></span>
+                    <div class="section">
+                        <p>{{ recipe.description }}</p>
+                    </div>
+                    <div class="chip teal white-text"><span>{{ recipe.category }}</span></div>
+                </div>
 
+                <div class="card-action">
+                    <a href="{{ url_for('view_recipe', recipe_id=recipe._id) }}">View Recipe</a>
+                </div>
+
+            </div>
         </div>
-    </div>
-    {% endfor %}
+        {% endfor %}
 
+    </div>
 </div>
 
 {% endblock %}
